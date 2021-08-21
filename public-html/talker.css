@@ -1,0 +1,22 @@
+/* when we add this class into the container of the signinForm, 
+all of this div children will be displayed as flex, centered both left right and top bottom */
+.sign-in-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgrey;
+    margin-bottom: 30px;
+    padding: 10px 0 10px 0;
+}
+
+h5 {
+    margin-top: 1em;
+}
+
+hr {
+    margin-top: 0.5em;
+}
+
+.nav-link-user, .nav-link-user:hover {
+    color: #ffffff;
+}
