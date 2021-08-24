@@ -24,7 +24,12 @@
             case "213":
             $feedback_type="success";
             $feedback_text="Password changed successfully";
-            break;            
+            break;    
+                    
+            case "311":
+            $feedback_type="success";
+            $feedback_text="Message sent successfully";
+            break; 
 
             case "804":
             $feedback_type="danger";
@@ -102,6 +107,16 @@
             $feedback_type="is-invalid";
             $feedback_text="New password must be different from the current password.";
             break;
+
+            case "301":
+            $feedback_type="is-invalid";
+            $feedback_text="Choose the email address of the recipient.";
+            break;
+
+            case "302":
+            $feedback_type="is-invalid";
+            $feedback_text="Message can not be empty and can not contain '<' or '>' characters.";
+            break;
             
             case "801":
             $feedback_type="is-invalid";
@@ -153,6 +168,16 @@
 
         //setting the fetch mode and returning the result
         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function phpFetchAllDB($db_query, $db_data) {
+        global $connection;
+
+        $statement = $connection->prepare($db_query);
+        $statement->execute($db_data);
+
+        //setting the fetch mode and returning the result
+        return $statement->fetchAll(PDO::FETCH_ASSOC);                                    
     }
 
     function phpSendEmail($to, $subject, $content) {
