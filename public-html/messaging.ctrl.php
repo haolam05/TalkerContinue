@@ -12,7 +12,9 @@
 	if ($messaging_recipient != "default" && $messaging_content_validation) {
 
 		//store the message in the database
-        
+        //insert the database row
+		$db_data = array($_SESSION["uid"], $messaging_recipient, $messaging_content, 0);
+		phpModifyDB('INSERT INTO messages (message_sender_id, message_recipient_id, message_content, message_read_by_recipient) VALUES (?, ?, ?, ?)', $db_data);
 
 		$_SESSION['msgid']='311';
  
@@ -22,6 +24,8 @@
 			$_SESSION['msgid']='301';
 		} else if (!$messaging_content_validation) {
 			$_SESSION['msgid']='302';
+
+			// return the messaging_recipient back to the form to preselect the receiver_email
             $_SESSION['messaging_recipient']=$messaging_recipient;
 		}
 	}
