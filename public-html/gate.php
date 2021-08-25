@@ -101,22 +101,35 @@
 		<?php } ?>
 		<!-- SYSTEM-WIDE FEEDBACK -->
 
-        <!-- LOAD MODULE -->
-        <?php
-            switch ($_GET["module"]) {
-                case "settings":
-                include('settings.php');
-                break;
+        <?php  if ($dbUserRow["user_verified"] == 0) { ?>             <!-- reminds user to activate, and do NOT allow access -->
+            
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-3">Access denied!</h1>
+                    <p class="lead">You need to verify your email address before you can use this feature.</p>
+                </div>
+            </div> 
 
-                case "messaging":
-                include('messaging.php');
-                break;
+        <?php } else { ?>
 
-                default:
-                break;
-            }
-        ?>
-        <!-- LOAD MODULE -->        
+            <!-- LOAD MODULE -->
+            <?php
+                switch ($_GET["module"]) {
+                    case "settings":
+                    include('settings.php');
+                    break;
+
+                    case "messaging":
+                    include('messaging.php');
+                    break;
+
+                    default:
+                    break;
+                }
+            ?>
+            <!-- LOAD MODULE -->        
+            
+        <?php } ?>
 	</div>
 
     <?php 

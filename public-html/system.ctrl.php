@@ -178,6 +178,13 @@
 
         //setting the fetch mode and returning the result
         return $statement->fetchAll(PDO::FETCH_ASSOC);                                    
+    }   
+
+    // Return user's email based on his id
+    function phpGetUserEmail($user_id) {
+        $db_data = array($user_id);
+        $db_result = phpFetchDB('SELECT user_email FROM users WHERE user_id = ?', $db_data);
+        return $db_result['user_email'];
     }
 
     function phpSendEmail($to, $subject, $content) {
