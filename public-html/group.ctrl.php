@@ -17,6 +17,7 @@
 		//system feedback - your group has been created
 		$_SESSION["msgid"] = "411";
 
+		header('Location: gate.php?module=groups');
 	} else {
 		//input feedback - for Javascript turned off
 		if (!$group_name_validation) {
@@ -25,7 +26,7 @@
 			//return the group_name back to the form
 			$_SESSION["group_name"] = $group_name;
 		}
+		
+		header('Location: gate.php?module=group');
 	}
-
-	header('Location: gate.php?module=group');
 ?>

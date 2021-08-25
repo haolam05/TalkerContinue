@@ -70,7 +70,15 @@
                             <span class="sr-only"> (current)</span>
                         <?php } ?>
                     </a>
-				</li>                  
+				</li>         
+				<li class="nav-item <?php if ($_GET['module']=='groups') { echo 'active'; } ?>">
+					<a  class="nav-link" 
+                        href="gate.php?module=groups">Groups
+                        <?php if ($_GET['module']=='groups') { ?>
+                            <span class="sr-only"> (current)</span>
+                        <?php } ?>
+                    </a>
+				</li>            
 				<li class="nav-item <?php if ($_GET['module']=='settings') { echo 'active'; } ?>">
 					<a  class="nav-link" 
                         href="gate.php?module=settings">Settings
@@ -123,10 +131,18 @@
                     include('messaging.php');
                     break;
 
+                    case "groups":
+                    include('groups.php');
+                    break;
+
                     case "group":
                     include('group.php');
                     break;
 
+                    case "posts":
+                    include('posts.php');
+                    break;
+    
                     default:
                     break;
                 }

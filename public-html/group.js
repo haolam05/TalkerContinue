@@ -22,7 +22,6 @@ function jsGroupValidateName(elementId) {
 	jsGroupSubmitEnable();
 	var element =  document.getElementById(elementId);
 
-
 	if(!jsGroupRegexPatternName.test(element.value)) {
 		if (!document.getElementById(elementId + "InvalidFeedback")) {
 			element.classList.add("is-invalid");
