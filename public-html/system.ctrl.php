@@ -31,6 +31,11 @@
             $feedback_text="Message sent successfully";
             break; 
 
+            case "411":
+            $feedback_type="success";
+            $feedback_text="Group has been created successfully";
+            break; 
+
             case "804":
             $feedback_type="danger";
             $feedback_text="This email is already used!";
@@ -118,6 +123,11 @@
             $feedback_text="Message can not be empty and can not contain '<' or '>' characters.";
             break;
             
+            case "401":
+            $feedback_type="is-invalid";
+            $feedback_text="Group name can not be empty and can not contain '<' or '>' characters.";
+            break;
+
             case "801":
             $feedback_type="is-invalid";
             $feedback_text="This is not a valid email address";

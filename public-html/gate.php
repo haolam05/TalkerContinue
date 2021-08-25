@@ -123,12 +123,16 @@
                     include('messaging.php');
                     break;
 
+                    case "group":
+                    include('group.php');
+                    break;
+
                     default:
                     break;
                 }
             ?>
             <!-- LOAD MODULE -->        
-            
+
         <?php } ?>
 	</div>
 
