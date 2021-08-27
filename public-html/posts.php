@@ -1,4 +1,13 @@
-<h5><?php echo phpGetGroupName($_GET['gid']); ?></h5>
+<div class="row">
+    <div class="col-lg-6">
+        <h5><?php echo phpGetGroupName($_GET["gid"]); ?></h5>
+    </div>
+    <div class="col-lg-6">
+        <?php if (phpGetGroupOwnerID($_GET["gid"]) == $_SESSION["uid"]) { ?>
+            <a href="gate.php?module=group&gid=<?php echo $_GET["gid"]; ?>" class="btn btn-primary btn-sm float-right mt-3" role="button">Settings</a>
+        <?php } ?>
+    </div>
+</div>
 <hr>
 
 <div class="row">
@@ -6,7 +15,7 @@
 		<form name="formPosts" action="posts.ctrl.php" method="POST" novalidate>
 
 			<div class="form-group">
-				<label for="formPostsContent">Post</label>
+				<label for="formPostsContent">Create new post</label>
 				<textarea   class="form-control 
                                 <?php if ($_SESSION['msgid']!='501' && $_SESSION['msgid']!='') { 
                                     echo 'is-valid'; 

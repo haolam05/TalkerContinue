@@ -35,6 +35,11 @@
             $feedback_type="success";
             $feedback_text="Group has been created successfully";
             break; 
+
+            case "412":
+            $feedback_type="success";
+            $feedback_text="Group name has been changed successfully!";
+            break; 
             
             case "511":
             $feedback_type="success";
@@ -212,6 +217,13 @@
         $db_data = array($group_id);
         $db_result = phpFetchDB('SELECT group_name FROM groups WHERE group_id = ?', $db_data);
         return $db_result['group_name'];
+    }
+
+    // Return group's owner id based on group's id
+    function phpGetGroupOwnerID($group_id) {
+        $db_data = array($group_id);
+        $db_result = phpFetchDB('SELECT group_owner_id FROM groups WHERE group_id = ?', $db_data);
+        return $db_result['group_owner_id'];
     }
 
     function phpSendEmail($to, $subject, $content) {
