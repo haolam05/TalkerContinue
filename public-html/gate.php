@@ -55,10 +55,10 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarText">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item <?php if ($_GET['module']=='') { echo 'active'; } ?>">
+				<li class="nav-item <?php if ($_GET['module']=='home') { echo 'active'; } ?>">
 					<a  class="nav-link" 
-                        href="gate.php">Home
-                        <?php if ($_GET['module']=='') { ?>
+                        href="gate.php?module=home">Home
+                        <?php if ($_GET['module']=='home') { ?>
                             <span class="sr-only"> (current)</span>
                         <?php } ?>
                     </a>
@@ -123,6 +123,10 @@
             <!-- LOAD MODULE -->
             <?php
                 switch ($_GET["module"]) {
+                    case "home":
+                    include('home.php');
+                    break;
+                    
                     case "settings":
                     include('settings.php');
                     break;
