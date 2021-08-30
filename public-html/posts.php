@@ -83,6 +83,33 @@
                         onclick='showTextAreaByPostId("<?php echo $dbPostRow["post_id"]; ?>")'
                     >Edit</a>
                 <?php } ?>
+
+                <!-- Display modal only if the current user is the author of the post or the owner of the group -->
+                <?php if ($_SESSION["uid"] == $dbPostRow["post_author_id"] || $_SESSION["uid"] == phpGetGroupOwnerID($_GET["gid"])) { ?>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePostModal<?php echo $dbPostRow['post_id']; ?>">Delete</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deletePostModal<?php echo $dbPostRow['post_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deletePostModalLabel">Delete the post</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this post? This action is irreversible!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" id="formPostsDeleteButton" name="formPostsDeleteButton" value="delete" class="btn btn-primary">Yes, delete it!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </form>
 
         <?php } ?>
