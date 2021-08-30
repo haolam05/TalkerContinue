@@ -13,19 +13,47 @@
 </div>
 
 <div class="row">
-	<div class="col-lg-12">
-		<table class="table">
+	<?php foreach ($dbGroupsList as $dbGroupRow) { ?>
+		<div class="group_content col-lg-6">
+			<a href="gate.php?module=posts&gid=<?php echo $dbGroupRow['group_id']; ?>">
+				<?php echo $dbGroupRow["group_name"]; ?>
+			</a>
+		</div>
 
-			<?php foreach ($dbGroupsList as $dbGroupRow) { ?>
-				<tr>
-					<td class="group_header">
-						<a href="gate.php?module=posts&gid=<?php echo $dbGroupRow['group_id']; ?>">
-							<?php echo $dbGroupRow["group_name"]; ?>
-						</a>
-					</td>
-				</tr>
+		<div class="group_content col-lg-6">
+
+			<!-- Display modal only if the current user is the owner of the group -->
+			<?php if ($_SESSION["uid"] == $dbGroupRow["group_owner_id"]) { ?>
+
+				<!-- Create a form -->
+				<form action="group.delete.ctrl.php" method="POST" novalidate>
+					<input type="hidden" id="formGroupsGroupID" name="formGroupsGroupID" value="<?php echo $dbGroupRow["group_id"]; ?>">
+
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-danger btn-sm float-right" data-toggle="modal" data-target="#deleteGroupModal<?php echo $dbGroupRow['group_id']; ?>">Delete</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="deleteGroupModal<?php echo $dbGroupRow['group_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteGroupModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="deleteModalLabel">Delete the group</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									Are you sure you want to delete this group? This action is irreversible!
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+									<button type="submit" id="formGroupsDeleteButton" name="formGroupsDeleteButton" value="delete" class="btn btn-primary">Yes, delete it!</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 			<?php } ?>
-
-		</table>
-	</div>
+		</div>
+	<?php } ?>
 </div>
