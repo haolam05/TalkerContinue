@@ -52,21 +52,50 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <table class="table">
         <?php foreach ($dbPostsList as $dbPostRow) { ?>
-            <tr>
-                <td class="message_header">
-                    FROM: <?php echo phpGetUserEmail($dbPostRow["post_author_id"]); ?>
-                    | DATE: <?php echo $dbPostRow["post_date"]; ?>
-                </td>
-            </tr>
-            <tr>
-                <td class="message_content">
-                    <?php echo $dbPostRow["post_content"]; ?>
-                </td>
-            </tr>
+            <div class="message_header">
+                FROM: <?php echo phpGetUserEmail($dbPostRow["post_author_id"]); ?>
+                | DATE: <?php echo $dbPostRow["post_date"]; ?>
+            </div>
+            <div class="message_content" id="databasePostsContent<?php echo $dbPostRow['post_id']; ?>">
+                <?php echo $dbPostRow["post_content"]; ?>
+            </div>
+
+            <form action="posts.edit.ctrl.php" method="POST" novalidate>
+                <div class="form-group">
+                    <textarea   class="form-control 
+                                    <?php 
+                                    if ($_SESSION['msgid']!='501' && $_SESSION['msgid']!='') { 
+                                        echo 'is-valid'; 
+                                    } else { 
+                                        echo (phpShowInputFeedback($_SESSION['msgid'])[0]); 
+                                    } 
+                                ?>" 
+                                id="formPostsContentEdited<?php echo $dbPostRow['post_id'] ?>" 
+                                name="formPostsContentEdited<?php echo $dbPostRow['post_id'] ?>" 
+                                onkeyup="jsPostsValidateTextArea('formPostsContentEdited<?php echo $dbPostRow['post_id'] ?>')"
+                                hidden
+                    ><?php echo $dbPostRow["post_content"]; ?></textarea>
+
+                    <?php if ($_SESSION["msgid"]=="501") { ?>
+                        <div class="invalid-feedback">
+                            <?php echo (phpShowInputFeedback($_SESSION["msgid"])[1]); ?>
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <input type="hidden" id="formPostsGroupID" name="formPostsGroupID" value="<?php echo $_GET['gid']; ?>">
+                <input type="hidden" id="formPostsPostID" name="formPostsPostID" value="<?php echo $dbPostRow["post_id"]; ?>">
+
+                <a  href="#formPostsContentEdited<?php echo $dbPostRow['post_id']; ?>" 
+                    id="formPostsEditButton<?php echo $dbPostRow['post_id']; ?>"
+                    class="btn btn-primary btn-sm" 
+                    role="button"
+                    onclick='showTextAreaByPostId("<?php echo $dbPostRow["post_id"]; ?>")'
+                >Edit</a>
+            </form>
+
         <?php } ?>
-    </table>
   </div>
 </div>
 

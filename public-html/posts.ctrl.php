@@ -12,7 +12,7 @@
 	if ($posts_content_validation) {
 
 		//insert the database row
-		$db_data = array($posts_group_id, $_SESSION["uid"], $posts_content);
+		$db_data = array($posts_group_id, $_SESSION["uid"], nl2br($posts_content));
 		phpModifyDB('INSERT INTO posts (post_group_id, post_author_id, post_content) VALUES (?, ?, ?)', $db_data);
 
 		//system feedback - your message has been sent
