@@ -27,6 +27,7 @@ hr {
   
 .message_header {
   font-size: 0.8em;
+  margin-top: 1.25rem;
 }
 
 .message_content {
@@ -40,4 +41,8 @@ hr {
 	font-size: 1em;
 	background-color: #e9ecef;
 	border-top: 4px solid #ffffff;
+}
+
+.form_posts_content {
+    margin-bottom: .25rem;
 }

@@ -16,24 +16,12 @@
 
 			<div class="form-group">
 				<label for="formPostsContent">Create new post</label>
-				<textarea   class="form-control 
-                                <?php if ($_SESSION['msgid']!='501' && $_SESSION['msgid']!='') { 
-                                    echo 'is-valid'; 
-                                } else { 
-                                    echo (phpShowInputFeedback($_SESSION['msgid'])[0]); 
-                                }
-                            ?>" 
+				<textarea   class="form-control" 
                             id="formPostsContent" 
                             name="formPostsContent" 
                             placeholder="Write the post here. Tags are not allowed." 
                             onkeyup="jsPostsValidateTextArea('formPostsContent')"
                             ><?php echo $_SESSION['posts_content']; ?></textarea>
-
-                <?php if ($_SESSION["msgid"]=="501") { ?>
-                    <div class="invalid-feedback">
-                        <?php echo (phpShowInputFeedback($_SESSION["msgid"])[1]); ?>
-                    </div>
-                <?php } ?>
             </div>
 
             <input type="hidden" id="formPostsGroupID" name="formPostsGroupID" value="<?php echo $_GET["gid"]; ?>">
@@ -62,7 +50,7 @@
             </div>
 
             <form action="posts.edit.ctrl.php" method="POST" novalidate>
-                <div class="form-group">
+                <div class="form-group form_posts_content">
                     <textarea   class="form-control 
                                     <?php 
                                     if ($_SESSION['msgid']!='501' && $_SESSION['msgid']!='') { 
@@ -87,12 +75,14 @@
                 <input type="hidden" id="formPostsGroupID" name="formPostsGroupID" value="<?php echo $_GET['gid']; ?>">
                 <input type="hidden" id="formPostsPostID" name="formPostsPostID" value="<?php echo $dbPostRow["post_id"]; ?>">
 
-                <a  href="#formPostsContentEdited<?php echo $dbPostRow['post_id']; ?>" 
-                    id="formPostsEditButton<?php echo $dbPostRow['post_id']; ?>"
-                    class="btn btn-primary btn-sm" 
-                    role="button"
-                    onclick='showTextAreaByPostId("<?php echo $dbPostRow["post_id"]; ?>")'
-                >Edit</a>
+                <?php if ($dbPostRow["post_author_id"] == $_SESSION["uid"]) { ?>
+                    <a  href="#formPostsContentEdited<?php echo $dbPostRow['post_id']; ?>" 
+                        id="formPostsEditButton<?php echo $dbPostRow['post_id']; ?>"
+                        class="btn btn-primary btn-sm" 
+                        role="button"
+                        onclick='showTextAreaByPostId("<?php echo $dbPostRow["post_id"]; ?>")'
+                    >Edit</a>
+                <?php } ?>
             </form>
 
         <?php } ?>

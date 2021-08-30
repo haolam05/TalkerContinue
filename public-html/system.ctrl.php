@@ -18,22 +18,22 @@
 
             case "212":
             $feedback_type="success";
-            $feedback_text="Data removed successfully";
+            $feedback_text="Data removed successfully!";
             break;
 
             case "213":
             $feedback_type="success";
-            $feedback_text="Password changed successfully";
+            $feedback_text="Password changed successfully!";
             break;    
                     
             case "311":
             $feedback_type="success";
-            $feedback_text="Message sent successfully";
+            $feedback_text="Message sent successfully!";
             break; 
 
             case "411":
             $feedback_type="success";
-            $feedback_text="Group has been created successfully";
+            $feedback_text="Group has been created successfully!";
             break; 
 
             case "412":
@@ -43,7 +43,12 @@
             
             case "511":
             $feedback_type="success";
-            $feedback_text="Post has been successfully sent";
+            $feedback_text="Post has been successfully sent!";
+            break;
+                        
+            case "512":
+            $feedback_type="success";
+            $feedback_text="Post has been successfully updated!";
             break;
 
             case "804":
