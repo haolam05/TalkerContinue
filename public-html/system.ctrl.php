@@ -255,7 +255,7 @@
         $mail->SMTPDebug = 0;
 
         //Set the hostname of the mail server
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = 'in-v3.mailjet.com';
 
         //Set the SMTP port number
         $mail->Port = 587;
@@ -267,13 +267,13 @@
         $mail->SMTPAuth = true;
 
         //Username to use for SMTP authentication - use full email address for gmail
-        $mail->Username = "tuonghao2001@gmail.com";
+        $mail->Username = 'db2377d04992a3cebf88ef37eec307de';
 
         //Password to use for SMTP authentication, your Gmail password comes here
         $mail->Password = SMTP_PSWD;
 
         //Set who the message is to be sent from
-        $mail->setFrom('tuonghao2001@gmail.com', 'Hao Lam');
+        $mail->setFrom('lamtuonghao2001@gmail.com', 'Hao Lam');
 
         //Set who the message is to be sent to
         $mail->addAddress($to);
@@ -303,13 +303,11 @@
 
     function phpSendVerificationEmail($user_email, $hashed_user_password) {
         $verify_message = '
+            Welcome to Talker! Thanks for signing up!<br><br>
+            Your account has been created but before you can login you need to activate it with the link below.<br><br>
 
-        Welcome to Talker! Thanks for signing up!<br><br>
-        Your account has been created but before you can login you need to activate it with the link below.<br><br>
-
-        Please click this link to activate your account:
-        <a href="http://localhost/verify.php?email='.$user_email.'&hash='.$hashed_user_password.'">Verify your email</a>
-
+            Please click this link to activate your account:
+            <a href="http://' . $_SERVER['HTTP_HOST'] . '/verify.php?email='.$user_email.'&hash='.$hashed_user_password.'">Verify your email</a>
         ';
 
         phpSendEmail($user_email, 'Verify your account', $verify_message);
